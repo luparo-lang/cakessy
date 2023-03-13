@@ -1,0 +1,447 @@
+{% extends 'base2.html' %}
+
+{% block content %}
+        
+		<!--================End Main Header Area =================-->
+        <section class="banner_area" style="background: url(img/banner/banner-bg.jpg) no-repeat scroll center center;
+		background-size: cover;">
+        	<div class="container">
+        		<div class="banner_text">
+        			<h3><a href="{% url 'shop' %}">Shop</a></h3>
+        			<ul>
+        				<li><a href="{% url 'index' %}">Home</a></li>
+					{% if stands %}	
+        				<li><a href="{% url 'shop-stands' %}">Stands</a></li>
+					{% elif cakes %}
+						<li><a href="{% url 'shop-cakes' %}">Cakes</a></li>
+					{% elif decorations%}
+						<li><a href="{% url 'shop-decoration' %}">Decorations</a></li>
+					{% elif decorating_tools %}
+						<li><a href="{% url 'shop-decorating-tools' %}">Decorating Tools</a></li>
+					{% elif bake_materials %}
+						<li><a href="{% url 'shop-bakeMat' %}">Baking Materials</a></li>
+					{% elif package_materials %}
+						<li><a href="{% url 'shop-packageMat' %}">Packaging Materials</a></li>
+					{% elif shopSearch %}
+						<li><a href="#">Results for {{shopSearch}}</a></li>
+					{% else%}
+						<li><a href="{% url 'shop' %}">All Products</a></li>
+					{% endif %}
+        			</ul>
+        		</div>
+        	</div>
+        </section>
+        <!--================End Main Header Area =================-->
+        
+        <!--================Product Area =================-->
+        <section class="product_area p_100">
+        	<div class="container">
+        		<div class="row product_inner_row">
+        			<div class="col-lg-9">
+        				<div class="row m0 product_task_bar"> 
+							<div class="product_task_inner"> 
+								<div class="float-left">
+									<a class="active" href="#"><i class="fa fa-th-large" aria-hidden="true"></i></a>
+									<a href="#"><i class="fa fa-th-list" aria-hidden="true"></i></a>
+									<span>Showing 1 - 10 of 55 results</span>
+								</div>
+								<!--<div class="float-right">
+									<h4>Sort by :</h4>
+									<select class="short">
+										<option data-display="Default">Default</option>
+										<option value="1">Default</option>
+										<option value="2">Default</option>
+										<option value="4">Default</option>
+									</select>
+								</div>-->
+							</div>
+        				</div>
+        				<div class="row product_item_inner">
+						{% if cakes %}
+							{% for cake in cakes %}
+								<div class="col-lg-4 col-md-4 col-6">
+									<div class="cake_feature_item">
+										<div class="cake_img">
+											<img src="{{ cake.img.url }}" alt="" height="225">
+										</div>
+										<div class="cake_text">
+											<h4>{{cake.price}}/=</h4>
+											<h3><a href="{{ cake.get_absolute_url }}">{{ cake.title }}</a></h3>
+											<a class="pest_btn" href="{{ cake.get_add_to_cart_url}}">Add to cart</a>
+										</div>
+									</div>
+								</div>
+							{% endfor %}
+						{% elif stands %}
+							{% for stand in stands %}
+								<div class="col-lg-4 col-md-4 col-6">
+									<div class="cake_feature_item">
+										<div class="cake_img">
+											<img src="{{ stand.img.url }}" alt="" height="225">
+										</div>
+										<div class="cake_text">
+											<h4>{{stand.price}}/=</h4>
+											<h3><a href="{{ stand.get_absolute_url }}">{{ stand.title }}</a></h3>
+											<a class="pest_btn" href="{{stand.get_add_to_cart_url}}">Add to cart</a>
+										</div>
+									</div>
+								</div>
+							{% endfor %}
+						{% elif bake_materials %}
+							{% for mat in bake_materials %}
+								<div class="col-lg-4 col-md-4 col-6">
+									<div class="cake_feature_item">
+										<div class="cake_img">
+											<img src="{{ mat.img.url }}" alt="" height="225">
+										</div>
+										<div class="cake_text">
+											<h4>{{mat.price}}/=</h4>
+											<h3><a href="{{ mat.get_absolute_url }}">{{ mat.title }}</a></h3>
+											<a class="pest_btn" href="{{ mat.get_add_to_cart_url}}">Add to cart</a>
+										</div>
+									</div>
+								</div>
+							{% endfor %}
+						{% elif decorations%}
+							{% for deco in decorations %}
+								<div class="col-lg-4 col-md-4 col-6">
+									<div class="cake_feature_item">
+										<div class="cake_img">
+											<img src="{{ deco.img.url }}" alt="" height="225">
+										</div>
+										<div class="cake_text">
+											<h4>{{deco.price}}/=</h4>
+											<h3><a href="{{ deco.get_absolute_url }}">{{ deco.title }}</a></h3>
+											<a class="pest_btn" href="{{ deco.get_add_to_cart_url}}">Add to cart</a>
+										</div>
+									</div>
+								</div>
+							{% endfor %}
+						{% elif decorating_tools %}
+							{% for tool in decorating_tools %}
+								<div class="col-lg-4 col-md-4 col-6">
+									<div class="cake_feature_item">
+										<div class="cake_img">
+											<img src="{{ tool.img.url }}" alt="" height="225">
+										</div>
+										<div class="cake_text">
+											<h4>{{deco.price}}/=</h4>
+											<h3><a href="{{ tool.get_absolute_url }}">{{ tool.title }}</a></h3>
+											<a class="pest_btn" href="{{ tool.get_add_to_cart_url}}">Add to cart</a>
+										</div>
+									</div>
+								</div>
+							{% endfor %}
+						{% elif package_materials%}
+							{% for mat in package_materials %}
+								<div class="col-lg-4 col-md-4 col-6">
+									<div class="cake_feature_item">
+										<div class="cake_img">
+											<img src="{{ mat.img.url }}" alt="" height="225">
+										</div>
+										<div class="cake_text">
+											<h4>{{deco.price}}/=</h4>
+											<h3><a href="{{ mat.get_absolute_url }}">{{ mat.title }}</a></h3>
+											<a class="pest_btn" href="{{ mat.get_add_to_cart_url}}">Add to cart</a>
+										</div>
+									</div>
+								</div>
+							{% endfor %}
+						{%elif shopResults %}
+							{% for item in shopResults %}
+								<div class="col-lg-4 col-md-4 col-6">
+									<div class="cake_feature_item">
+										<div class="cake_img">
+											<img src="{{ item.img.url }}" alt="" height="225">
+										</div>
+										<div class="cake_text">
+											<h4>{{deco.price}}/=</h4>
+											<h3><a href="{{ item.get_absolute_url }}">{{ item.title }}</a></h3>
+											<a class="pest_btn" href="{{ item.get_add_to_cart_url}}">Add to cart</a>
+										</div>
+									</div>
+								</div>
+							{% endfor %}	
+						{% else %}
+							{% for item in object_list|slice:"9" %}
+								<div class="col-lg-4 col-md-4 col-6">
+									<div class="cake_feature_item">
+										<div class="cake_img">
+											<img src="{{ item.img.url }}" alt="" height="225">
+										</div>
+										<div class="cake_text">
+											<h4>{{item.price}}/=</h4>
+											<h3><a href="{{ item.get_absolute_url }}">{{ item.title }}</a></h3>
+											<a class="pest_btn" href="{{item.get_add_to_cart_url}}">Add to cart</a>
+										</div>
+									</div>
+								</div>
+							{% endfor %}
+						{% endif %}
+        				</div>
+        				<div class="product_pagination">
+        					<div class="left_btn">
+        						<a href="#"><i class="lnr lnr-arrow-left"></i> New posts</a>
+        					</div>
+        					<div class="middle_list">
+								<nav aria-label="Page navigation example">
+									<ul class="pagination">
+									<li class="page-item"><a class="page-link" href="#">1</a></li>
+									<li class="page-item active"><a class="page-link" href="#">2</a></li>
+									<li class="page-item"><a class="page-link" href="#">3</a></li>
+									<li class="page-item"><a class="page-link" href="#">...</a></li>
+									<li class="page-item"><a class="page-link" href="#">12</a></li>
+									</ul>
+								</nav>
+        					</div>
+        					<div class="right_btn"><a href="#">Older posts <i class="lnr lnr-arrow-right"></i></a></div>
+        				</div>
+        			</div>
+        			<div class="col-lg-3">
+        				<div class="product_left_sidebar">
+        					<aside class="left_sidebar search_widget">
+        						<div class="input-group">
+									<form method="post" action="{% url 'search-shop' %}">
+										{% csrf_token %}
+										<input type="search" class="form-control" name="shopSearch" placeholder="Enter Search Keywords">
+										<div class="input-group-append">
+											<button class="btn" type="submit"><i class="icon icon-Search"></i></button>
+										</div>
+									</form>
+								</div>
+        					</aside>
+        					<aside class="left_sidebar p_catgories_widget">
+        						<div class="p_w_title">
+        							<h3>Product Categories</h3>
+        						</div>
+        						<ul class="list_style">
+        							<li><a href="{% url 'shop-cakes' %}">Cakes</a></li>
+									<li><a href="{% url 'shop-bakeMat' %}">Baking Supplies</a></li>
+        							<li><a href="{% url 'shop-decorating-tools' %}">Cake Decorating Tools</a></li>
+        							<li><a href="{% url 'shop-decoration' %}">Cake Decorations</a></li>
+									<li><a href="{% url 'shop-packageMat' %}">Packaging Materials</a></li>
+        							<li><a href="{% url 'shop-stands' %}">Cake Stands</a></li>
+        						</ul>
+        					</aside>
+        					<aside class="left_sidebar p_price_widget">
+        						<div class="p_w_title">
+        							<h3>Filter By Price</h3>
+        						</div>
+        						<div class="filter_price">
+									<div id="slider-range"></div>
+       								<label for="amount">Price range:</label>
+									<input type="text" id="amount" readonly />
+       								<a href="#">Filter</a>
+        						</div>
+        					</aside>
+        					<aside class="left_sidebar p_sale_widget">
+							{% if cakes%}	
+								<div class="p_w_title">
+									<h3>Top Sale cakes</h3>
+								</div>
+								{% for top_sale in cakes|slice:"6" %}
+								<div class="media">
+									<div class="d-flex">
+										<img src="{{ top_sale.img.url }}" alt="" width="100" height="100">
+									</div>
+									<div class="media-body">
+										<a href="#"><h4>{{ top_sale.title }}</h4></a>
+										<ul class="list_style">
+											<li><a href="#"><i class="fa fa-star-o"></i></a></li>
+											<li><a href="#"><i class="fa fa-star-o"></i></a></li>
+											<li><a href="#"><i class="fa fa-star-o"></i></a></li>
+											<li><a href="#"><i class="fa fa-star-o"></i></a></li>
+											<li><a href="#"><i class="fa fa-star-o"></i></a></li>
+										</ul>
+										<h5>{{ top_sale.price }}/=</h5>
+									</div>
+								</div>
+								{% endfor %}
+							{%elif stands %}
+        						<div class="p_w_title">
+        							<h3>Top Sale Stands</h3>
+        						</div>
+								{% for top_sale in stands|slice:"6" %}
+        						<div class="media">
+        							<div class="d-flex">
+        								<img src="{{ top_sale.img.url }}" alt="" width="100" height="100">
+        							</div>
+        							<div class="media-body">
+        								<a href="#"><h4>{{ top_sale.title }}</h4></a>
+        								<ul class="list_style">
+        									<li><a href="#"><i class="fa fa-star-o"></i></a></li>
+        									<li><a href="#"><i class="fa fa-star-o"></i></a></li>
+        									<li><a href="#"><i class="fa fa-star-o"></i></a></li>
+        									<li><a href="#"><i class="fa fa-star-o"></i></a></li>
+        									<li><a href="#"><i class="fa fa-star-o"></i></a></li>
+        								</ul>
+        								<h5>{{ top_sale.price }}/=</h5>
+        							</div>
+        						</div>
+								{% endfor %}
+							{%elif bake_materials %}
+								<div class="p_w_title">
+									<h3>Top Sale Baking Materials</h3>
+								</div>
+								{% for top_sale in bake_materials|slice:"6" %}
+								<div class="media">
+									<div class="d-flex">
+										<img src="{{ top_sale.img.url }}" alt="" width="100" height="100">
+									</div>
+									<div class="media-body">
+										<a href="#"><h4>{{ top_sale.title }}</h4></a>
+										<ul class="list_style">
+											<li><a href="#"><i class="fa fa-star-o"></i></a></li>
+											<li><a href="#"><i class="fa fa-star-o"></i></a></li>
+											<li><a href="#"><i class="fa fa-star-o"></i></a></li>
+											<li><a href="#"><i class="fa fa-star-o"></i></a></li>
+											<li><a href="#"><i class="fa fa-star-o"></i></a></li>
+										</ul>
+										<h5>{{ top_sale.price }}/=</h5>
+									</div>
+								</div>
+								{% endfor %}
+        					{% elif package_materials %}
+								<div class="p_w_title">
+									<h3>Top Sale Packaging Materials</h3>
+								</div>
+								{% for top_sale in package_materials|slice:"6" %}
+								<div class="media">
+									<div class="d-flex">
+										<img src="{{ top_sale.img.url }}" alt="" width="100" height="100">
+									</div>
+									<div class="media-body">
+										<a href="#"><h4>{{ top_sale.title }}</h4></a>
+										<ul class="list_style">
+											<li><a href="#"><i class="fa fa-star-o"></i></a></li>
+											<li><a href="#"><i class="fa fa-star-o"></i></a></li>
+											<li><a href="#"><i class="fa fa-star-o"></i></a></li>
+											<li><a href="#"><i class="fa fa-star-o"></i></a></li>
+											<li><a href="#"><i class="fa fa-star-o"></i></a></li>
+										</ul>
+										<h5>{{ top_sale.price }}/=</h5>
+									</div>
+								</div>
+								{% endfor %}
+							{% elif decorations %}
+								<div class="p_w_title">
+									<h3>Top Sale Decorations</h3>
+								</div>
+								{% for top_sale in decorations|slice:"6" %}
+								<div class="media">
+									<div class="d-flex">
+										<img src="{{ top_sale.img.url }}" alt="" width="100" height="100">
+									</div>
+									<div class="media-body">
+										<a href="#"><h4>{{ top_sale.title }}</h4></a>
+										<ul class="list_style">
+											<li><a href="#"><i class="fa fa-star-o"></i></a></li>
+											<li><a href="#"><i class="fa fa-star-o"></i></a></li>
+											<li><a href="#"><i class="fa fa-star-o"></i></a></li>
+											<li><a href="#"><i class="fa fa-star-o"></i></a></li>
+											<li><a href="#"><i class="fa fa-star-o"></i></a></li>
+										</ul>
+										<h5>{{ top_sale.price }}/=</h5>
+									</div>
+								</div>
+								{% endfor %}
+							{% elif decorating_tools %}
+								<div class="p_w_title">
+									<h3>Top Sale Decorating Tools</h3>
+								</div>
+								{% for top_sale in decorating_tools|slice:"6" %}
+								<div class="media">
+									<div class="d-flex">
+										<img src="{{ top_sale.img.url }}" alt="" width="100" height="100">
+									</div>
+									<div class="media-body">
+										<a href="#"><h4>{{ top_sale.title }}</h4></a>
+										<ul class="list_style">
+											<li><a href="#"><i class="fa fa-star-o"></i></a></li>
+											<li><a href="#"><i class="fa fa-star-o"></i></a></li>
+											<li><a href="#"><i class="fa fa-star-o"></i></a></li>
+											<li><a href="#"><i class="fa fa-star-o"></i></a></li>
+											<li><a href="#"><i class="fa fa-star-o"></i></a></li>
+										</ul>
+										<h5>{{ top_sale.price }}/=</h5>
+									</div>
+								</div>
+								{% endfor %}
+							{% elif shopResults %}
+								<div class="p_w_title">
+									<h3>Top Sale Products</h3>
+								</div>
+								{% for top_sale in shopResults|slice:"6" %}
+								<div class="media">
+									<div class="d-flex">
+										<img src="{{ top_sale.img.url }}" alt="" width="100" height="100">
+									</div>
+									<div class="media-body">
+										<a href="#"><h4>{{ top_sale.title }}</h4></a>
+										<ul class="list_style">
+											<li><a href="#"><i class="fa fa-star-o"></i></a></li>
+											<li><a href="#"><i class="fa fa-star-o"></i></a></li>
+											<li><a href="#"><i class="fa fa-star-o"></i></a></li>
+											<li><a href="#"><i class="fa fa-star-o"></i></a></li>
+											<li><a href="#"><i class="fa fa-star-o"></i></a></li>
+										</ul>
+										<h5>{{ top_sale.price }}/=</h5>
+									</div>
+								</div>
+								{% endfor %}
+							{% else %}
+								<div class="p_w_title">
+									<h3>Top Sale Products</h3>
+								</div>
+								{% for top_sale in object_list|slice:"6" %}
+								<div class="media">
+									<div class="d-flex">
+										<img src="{{ top_sale.img.url }}" alt="" width="100" height="100">
+									</div>
+									<div class="media-body">
+										<a href="#"><h4>{{ top_sale.title }}</h4></a>
+										<ul class="list_style">
+											<li><a href="#"><i class="fa fa-star-o"></i></a></li>
+											<li><a href="#"><i class="fa fa-star-o"></i></a></li>
+											<li><a href="#"><i class="fa fa-star-o"></i></a></li>
+											<li><a href="#"><i class="fa fa-star-o"></i></a></li>
+											<li><a href="#"><i class="fa fa-star-o"></i></a></li>
+										</ul>
+										<h5>{{ top_sale.price }}/=</h5>
+									</div>
+								</div>
+								{% endfor %}
+							{% endif %}
+        					</aside>
+        				</div>
+        			</div>
+        		</div>
+        	</div>
+        </section>
+        <!--================End Product Area =================-->
+        
+        <!--================Newsletter Area =================-->
+        <section class="newsletter_area">
+        	<div class="container">
+        		<div class="row newsletter_inner">
+        			<div class="col-lg-6">
+        				<div class="news_left_text">
+        					<h4>Join our Newsletter list to get all the latest offers, discounts and other benefits</h4>
+        				</div>
+        			</div>
+        			<div class="col-lg-6">
+        				<div class="newsletter_form">
+							<div class="input-group">
+								<input type="text" class="form-control" placeholder="Enter your email address">
+								<div class="input-group-append">
+									<button class="btn btn-outline-secondary" type="button">Subscribe Now</button>
+								</div>
+							</div>
+        				</div>
+        			</div>
+        		</div>
+        	</div>
+        </section>
+        <!--================End Newsletter Area =================-->
+
+{% endblock %}

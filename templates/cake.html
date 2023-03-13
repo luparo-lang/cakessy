@@ -1,0 +1,116 @@
+{% extends 'base2.html' %}
+
+{% block content %}
+        
+        <!--================End Main Header Area =================-->
+        <section class="banner_area" style="background: url(img/banner/banner-bg.jpg) no-repeat scroll center center;
+		background-size: cover;">
+        	<div class="container">
+        		<div class="banner_text">
+        			<h3>Our Cakes</h3>
+        			<ul>
+        				<li><a href="index.html">Home</a></li>
+        				<li><a href="{% url 'cakes' %}">Cakes</a></li>
+        			</ul>
+        		</div>
+        	</div>
+        </section>
+        <!--================End Main Header Area =================-->
+        
+        <!--================Blog Main Area =================-->
+        <section class="our_cakes_area p_100">
+        	<div class="container">
+
+			{%if birthday_cakes %}
+				<div class="main_title">
+					<h2>Birthday Cakes</h2>
+					<h5></h5>
+				</div>
+				<div class="cake_feature_row row">
+					{% for cake in birthday_cakes %}
+					<div class="col-lg-3 col-md-4 col-6">
+						<div class="cake_feature_item">
+							<div class="cake_img">
+								<img src="{{ cake.img.url }}" alt="" height="225">
+							</div>
+							<div class="cake_text">
+								<h4>{{ cake.price }}/=</h4>
+								<h3><a href="{{ cake.get_absolute_url }}">{{ cake.title }}</a></h3>
+								<a class="pest_btn" href="{% url 'cart' %}">Add to cart</a>
+							</div>
+						</div>
+					</div>
+					{% endfor %}
+				</div>
+			{%elif wedding_cakes %}
+				<div class="main_title">
+					<h2>Wedding Cakes</h2>
+				</div>
+				
+				<div class="cake_feature_row row">
+					{% for cake in wedding_cakes %}
+					<div class="col-lg-3 col-md-4 col-6">
+						<div class="cake_feature_item">
+							<div class="cake_img">
+								<img src="{{ cake.img.url }}" alt="" height="225">
+							</div>
+							<div class="cake_text">
+								<h4>{{ cake.price }}/=</h4>
+								<h3><a href="{{ cake.get_absolute_url }}">{{ cake.title }}</a></h3>
+								<a class="pest_btn" href="{% url 'cart' %}">Add to cart</a>
+							</div>
+						</div>
+					</div>
+					{% endfor %}
+				</div>
+			{%else%}
+				<div class="main_title">
+					<h2>All Cakes</h2>
+					<h5></h5>
+				</div>
+				<div class="cake_feature_row row">
+					{% for cake in cakes%}
+					<div class="col-lg-3 col-md-4 col-6">
+						<div class="cake_feature_item">
+							<div class="cake_img">
+								<img src="{{ cake.img.url }}" alt="" height="225">
+							</div>
+							<div class="cake_text">
+								<h4>{{ cake.price }}/=</h4>
+								<h3><a href="{{ cake.get_absolute_url }}">{{ cake.title }}</a></h3>
+								<a class="pest_btn" href="{% url 'cart' %}">Add to cart</a>
+							</div>
+						</div>
+					</div>
+					{% endfor %}
+				</div>
+			{%endif%}	
+        	</div>
+        </section>
+        <!--================End Blog Main Area =================-->
+        
+        <!--================Newsletter Area =================-->
+        <section class="newsletter_area">
+        	<div class="container">
+        		<div class="row newsletter_inner">
+        			<div class="col-lg-6">
+        				<div class="news_left_text">
+        					<h4>Join our Newsletter list to get all the latest offers, discounts and other benefits</h4>
+        				</div>
+        			</div>
+        			<div class="col-lg-6">
+        				<div class="newsletter_form">
+							<div class="input-group">
+								<input type="text" class="form-control" placeholder="Enter your email address">
+								<div class="input-group-append">
+									<button class="btn btn-outline-secondary" type="button">Subscribe Now</button>
+								</div>
+							</div>
+        				</div>
+        			</div>
+        		</div>
+        	</div>
+        </section>
+        <!--================End Newsletter Area =================-->
+        
+{% endblock %}
